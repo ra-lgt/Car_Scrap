@@ -54,7 +54,7 @@ class Kijiji_UI:
             if(log==""):
                 pass
             else:
-                label=ctk.CTkLabel(self.scrollable_frame,text=log,bg_color="#1d1028",font=("Montserrat",12))
+                label=ctk.CTkLabel(self.scrollable_frame,text_color="#FFFFFF",text=log,bg_color="#1d1028",font=("Montserrat",12))
                 label.pack()
 
             time.sleep(2)
@@ -109,7 +109,7 @@ class Kijiji_UI:
         ToolTip(thresh_info,"Threshold defines the number of date the scrapping should scrap with mobile number")
 
 
-        slide_label=ctk.CTkLabel(config_frame,text="Threshold",bg_color="#280b3b",font=("Montserrat",18))
+        slide_label=ctk.CTkLabel(config_frame,text_color="#FFFFFF",text="Threshold",bg_color="#280b3b",font=("Montserrat",18))
         slide_label.grid(row=0, column=0,padx=25, sticky='w')
 
         t_slider = ctk.CTkSlider(config_frame, from_=0, to=5000, command=lambda value:update_value_t(t_slider),bg_color="#280b3b",fg_color="black",progress_color="#cc92f2",button_color="#cc92f2",button_hover_color="#cc92f2")
@@ -118,7 +118,7 @@ class Kijiji_UI:
 
         t_slider.set(0)
 
-        t_label=ctk.CTkLabel(config_frame,text="",bg_color="#280b3b",font=("Montserrat",18))
+        t_label=ctk.CTkLabel(config_frame,text="",text_color="#FFFFFF",bg_color="#280b3b",font=("Montserrat",18))
         t_label.grid(row=0, column=2,sticky='w')
 
         def update_value_t(t_slider):
@@ -129,7 +129,7 @@ class Kijiji_UI:
 
         ToolTip(time_info,text="Depends on the internet speed you manage to sleep internet>sleep || internet<sleep")
 
-        time_label=ctk.CTkLabel(config_frame,text="Sleep",bg_color="#280b3b",font=("Montserrat",18))
+        time_label=ctk.CTkLabel(config_frame,text_color="#FFFFFF",text="Sleep",bg_color="#280b3b",font=("Montserrat",18))
         time_label.grid(row=1, column=0,padx=25,pady=5,sticky='w')
 
         time_slider = ctk.CTkSlider(config_frame, from_=0, to=100, command=lambda value:update_value_time(time_slider),bg_color="#280b3b",fg_color="black",progress_color="#cc92f2",button_color="#cc92f2",button_hover_color="#cc92f2")
@@ -139,7 +139,7 @@ class Kijiji_UI:
         def update_value_time(t_slider):
             time.configure(text=str(int(t_slider.get()))+"s")
 
-        time=ctk.CTkLabel(config_frame,text="",bg_color="#280b3b",font=("Montserrat",18))
+        time=ctk.CTkLabel(config_frame,text="",text_color="#FFFFFF",bg_color="#280b3b",font=("Montserrat",18))
         time.grid(row=1, column=2,sticky='w')
         car_or_bike=None
 
@@ -148,19 +148,19 @@ class Kijiji_UI:
             car_info.grid(row=2,column=0,sticky='w')
             
             ToolTip(car_info,text="It defines what data need to scrap either car or bike")
-            car_bike_label=ctk.CTkLabel(config_frame,text="Choose the target",bg_color="#280b3b",font=("Montserrat",18))
+            car_bike_label=ctk.CTkLabel(config_frame,text_color="#FFFFFF",text="Choose the target",bg_color="#280b3b",font=("Montserrat",18))
             car_bike_label.grid(row=2, column=0,padx=25,pady=5,sticky='w')
-            car_or_bike=ctk.CTkComboBox(config_frame,values=["Cars/Trucks","Bike"],fg_color="#280b3b",bg_color="#280b3b",button_color="#cc92f2",border_color="#cc92f2",button_hover_color="#cc92f2")
+            car_or_bike=ctk.CTkComboBox(config_frame,values=["Cars/Trucks","Bike"],text_color="#FFFFFF",fg_color="#280b3b",bg_color="#280b3b",button_color="#cc92f2",border_color="#cc92f2",button_hover_color="#cc92f2")
             car_or_bike.grid(row=2, column=1,padx=30,pady=5,sticky='w')
 
         brow_info=ctk.CTkLabel(config_frame, image=self.images['info'], text="")
         brow_info.grid(row=3,column=0,sticky='w')
         ToolTip(brow_info,text="if you set head then the browser will render\nif you set headless then the you won't see browser\n")
 
-        browser_target=ctk.CTkLabel(config_frame,text="Choose the Type",bg_color="#280b3b",font=("Montserrat",18))
+        browser_target=ctk.CTkLabel(config_frame,text="Choose the Type",bg_color="#280b3b",font=("Montserrat",18),text_color="#FFFFFF")
         browser_target.grid(row=3, column=0,padx=25,pady=5,sticky='w')
 
-        head_headless=ctk.CTkComboBox(config_frame,values=["Headless","Head"],fg_color="#280b3b",bg_color="#280b3b",button_color="#cc92f2",border_color="#cc92f2",button_hover_color="#cc92f2")
+        head_headless=ctk.CTkComboBox(config_frame,values=["Headless","Head"],text_color="#FFFFFF",fg_color="#280b3b",bg_color="#280b3b",button_color="#cc92f2",border_color="#cc92f2",button_hover_color="#cc92f2")
         head_headless.grid(row=3, column=1,padx=30,pady=5,sticky='w')
 
         self.button.configure(text="Scrap",command=lambda:self.get_config(time_slider,t_slider,head_headless,car_or_bike))
@@ -204,10 +204,10 @@ class Kijiji_UI:
         self.sub_heading.pack(anchor='n', pady=40)
 
         self.radio_var = tk.StringVar(value="")
-        radiobutton_1 = ctk.CTkRadioButton(home_frame, text="kijiji", variable=self.radio_var, value="Kiji", bg_color="#1f0a2d",fg_color="#cc92f2",hover_color="#cc92f2",font=("Montserrat",20))
+        radiobutton_1 = ctk.CTkRadioButton(home_frame, text="kijiji", variable=self.radio_var, value="Kiji", bg_color="#1f0a2d",fg_color="#cc92f2",hover_color="#cc92f2",font=("Montserrat",20),text_color="#FFFFFF")
         radiobutton_1.grid(row=0, column=0, sticky='w')
 
-        radiobutton_2 = ctk.CTkRadioButton(home_frame, text="kijiji Autos", variable=self.radio_var, value="Kiji_auto", bg_color="#280b3b",fg_color="#cc92f2",hover_color="#cc92f2",font=("Montserrat",20))
+        radiobutton_2 = ctk.CTkRadioButton(home_frame, text="kijiji Autos", variable=self.radio_var, value="Kiji_auto", bg_color="#280b3b",fg_color="#cc92f2",hover_color="#cc92f2",font=("Montserrat",20),text_color="#FFFFFF")
         radiobutton_2.grid(row=0, column=1,padx=20, sticky='w')
 
         self.button=ctk.CTkButton(self.root,text="Next",fg_color="#cc92f2",hover_color="#2e044a",command=self.web_config)
