@@ -23,7 +23,7 @@ def append_data_to_sheet(sheet, data_to_append):
         sheet.append_row(row)
 
 def push_data(data, name):
-    data_to_append = pd.DataFrame(data)
+    data_to_append = pd.DataFrame(data,index=[0])
 
     client = authorize_google_sheets()
     sheet = get_sheet(client, name)

@@ -15,7 +15,7 @@ class Kijiji_UI:
     def __init__(self):
         super().__init__()
         self.root = ctk.CTk()
-        self.root.title('Kijiji Scrap')
+        self.root.title('Autotrader Scrap')
         self.root.geometry('550x500')
         self.images={
             'bg_img':ctk.CTkImage(light_image=Image.open("app_bg.png"),
@@ -75,9 +75,10 @@ class Kijiji_UI:
 
 
     def start_thread(self):
+        print("OKAYYY")
         self.stop=True
         self.front_end = threading.Thread(target=self.main_page)
-        self.backend = threading.Thread(target=self.main.backend_app,args=(self.radio_var.get(),self.t_slider,self.time_slider,self.browser,self.car_bike))
+        self.backend = threading.Thread(target=self.main.backend_app,args=(self.t_slider,self.time_slider,self.browser,self.car_bike))
 
         self.front_end.start()
         self.backend.start()
@@ -96,11 +97,34 @@ class Kijiji_UI:
 
         self.start_thread()
 
-    def config_gen(self):
+    
+
+    
+    def start_app(self):
+        try:
+            os.remove("Kiji_all_logs.txt")
+            os.remove("ERROR.txt")
+            os.remove("SUCCESS.txt")
+        except:
+            pass
+        
+        image_label = ctk.CTkLabel(self.root, image=self.images['bg_img'], text="")
+        image_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+        home_frame = ctk.CTkFrame(master=self.root, width=self.root.winfo_screenwidth()-200, height=self.root.winfo_screenheight()-200)
+        home_frame.place(relx=0.3,rely=0.5)
+        home_image = ctk.CTkLabel(home_frame, image=self.images['bg_img'], text="")
+        home_image.place(x=0, y=0, relwidth=1, relheight=1)
+
+        self.heading=ctk.CTkLabel(self.root,text="AUTOTRADER SCRAP",text_color="white",font=("Montserrat",20),fg_color="#110618")
+        self.heading.pack(anchor='n', pady=20)
+
+        self.sub_heading=ctk.CTkLabel(self.root,text="Configure Bot",text_color="white",font=("Montserrat",20),fg_color="#110618")
+        self.sub_heading.pack(anchor='n', pady=40)
+
         for i in self.delete_frames:
             i.destroy()
 
-        self.sub_heading.configure(text="Configure Bot")
 
         config_frame = ctk.CTkFrame(master=self.root, width=self.root.winfo_screenwidth()-200, height=self.root.winfo_screenheight()-200,fg_color="#280b3b")
         config_frame.place(relx=0.05,rely=0.4)
@@ -143,7 +167,7 @@ class Kijiji_UI:
         time.grid(row=1, column=2,sticky='w')
         car_or_bike=None
 
-        if(self.radio_var.get()=="Kiji"):
+        if(True):
             car_info=ctk.CTkLabel(config_frame, image=self.images['info'], text="")
             car_info.grid(row=2,column=0,sticky='w')
             
@@ -163,59 +187,10 @@ class Kijiji_UI:
         head_headless=ctk.CTkComboBox(config_frame,values=["Headless","Head"],text_color="#FFFFFF",fg_color="#280b3b",bg_color="#280b3b",button_color="#cc92f2",border_color="#cc92f2",button_hover_color="#cc92f2")
         head_headless.grid(row=3, column=1,padx=30,pady=5,sticky='w')
 
-        self.button.configure(text="Scrap",command=lambda:self.get_config(time_slider,t_slider,head_headless,car_or_bike))
-
-        self.delete_frames.append(config_frame)
-
-
-        
-
-        
-
-
-    
-    def web_config(self):
-        self.config_gen()
-
-
-    
-    def start_app(self):
-        try:
-            os.remove("Kiji_all_logs.txt")
-            os.remove("ERROR.txt")
-            os.remove("SUCCESS.txt")
-        except:
-            pass
-        
-        image_label = ctk.CTkLabel(self.root, image=self.images['bg_img'], text="")
-        image_label.place(x=0, y=0, relwidth=1, relheight=1)
-
-        home_frame = ctk.CTkFrame(master=self.root, width=self.root.winfo_screenwidth()-200, height=self.root.winfo_screenheight()-200)
-        home_frame.place(relx=0.3,rely=0.5)
-        home_image = ctk.CTkLabel(home_frame, image=self.images['bg_img'], text="")
-        home_image.place(x=0, y=0, relwidth=1, relheight=1)
-
-        self.heading=ctk.CTkLabel(self.root,text="KIJIJI SCRAP",text_color="white",font=("Montserrat",20),fg_color="#110618")
-        self.heading.pack(anchor='n', pady=20)
-        self.asghar=ctk.CTkLabel(self.root,text="All right reserved by Asghar",text_color="white",font=("Montserrat",10),fg_color="#110618")
-        self.asghar.pack(anchor='n')
-
-        self.sub_heading=ctk.CTkLabel(self.root,text="Choose the Website",text_color="white",font=("Montserrat",20),fg_color="#110618")
-        self.sub_heading.pack(anchor='n', pady=40)
-
-        self.radio_var = tk.StringVar(value="")
-        radiobutton_1 = ctk.CTkRadioButton(home_frame, text="kijiji", variable=self.radio_var, value="Kiji", bg_color="#1f0a2d",fg_color="#cc92f2",hover_color="#cc92f2",font=("Montserrat",20),text_color="#FFFFFF")
-        radiobutton_1.grid(row=0, column=0, sticky='w')
-
-        radiobutton_2 = ctk.CTkRadioButton(home_frame, text="kijiji Autos", variable=self.radio_var, value="Kiji_auto", bg_color="#280b3b",fg_color="#cc92f2",hover_color="#cc92f2",font=("Montserrat",20),text_color="#FFFFFF")
-        radiobutton_2.grid(row=0, column=1,padx=20, sticky='w')
-
-        self.button=ctk.CTkButton(self.root,text="Next",fg_color="#cc92f2",hover_color="#2e044a",command=self.web_config)
+        self.button=ctk.CTkButton(self.root,text="Next",fg_color="#cc92f2",hover_color="#2e044a",command=lambda:self.get_config(time_slider,t_slider,head_headless,car_or_bike))
         self.button.place(relx=0.35,rely=0.9)
 
-        self.delete_frames.append(self.asghar)
-        self.delete_frames.append(home_frame)
-
+        self.delete_frames.append(config_frame)
 
 
         self.root.mainloop()
